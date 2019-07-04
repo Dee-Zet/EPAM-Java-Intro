@@ -7,13 +7,7 @@ public class Main {
     Определить, являются ли данные точки вершинами треугольника. И если да, то
     дополнительно определить, является ли данный треугольник прямоугольным. */
 
-    public static boolean TriangleVertex (int x1, int y1, int x2, int y2, int x3, int y3) {
-        //if ((x1 == x2) & (x1 == x3)) return false;
-        //if ((y1 == y2) & (y1 == y3)) return false;
-        //if (((x1 == x2) & (y1 == y2)) || ((x1 == x3) & (y1 == y3)) || ((x2 == x3) & (y2 == y3)))
-        //    return false;
-        return true;
-    }
+    public static boolean TriangleVertex (int x1, int y1, int x2, int y2, int x3, int y3) { return true; }
 
     public static boolean RightTriangleVertex (int x1, int y1, int x2, int y2, int x3, int y3) {
         return true;
@@ -26,10 +20,15 @@ public class Main {
     Разработайте программу, которая высчитывала бы, сколько голов и глаз у
     дракона, которому N лет? */
 
+    private static final int HEADS_BY_BIRTH = 3;
+    private static final int HEADS_BY_200YS = 600 + HEADS_BY_BIRTH;
+    private static final int HEADS_BY_300YS = 800 + HEADS_BY_BIRTH;
+
     public static int DragonHeadsCount (int age) {
-        if (age > 300) return 800 + (age - 300) + 3;
-        if (age > 200) return 600 + (age - 200) + 3;
-        return age * 3 + 3;
+        if (age < 0) return 0;
+        if (age > 300) return HEADS_BY_300YS + (age - 300);
+        if (age > 200) return HEADS_BY_200YS + (age - 200);
+        return age * 3 + HEADS_BY_BIRTH;
     }
 
     public static int DragonEyesCount (int age) {
@@ -41,11 +40,11 @@ public class Main {
     (символ) гласной (постарайтесь сделать минимум четырьмя способами,
     разрешается и больше). */
 
-    public static boolean VowelByArrayLoop (char c) {
-        char [] vowels = new char[] {'А', 'О', 'И', 'Е', 'Ё', 'Э', 'Ы', 'У', 'Ю', 'Я'};
-        c = Character.toUpperCase(c);
+    private static final char [] VOWELS = {'А', 'О', 'И', 'Е', 'Ё', 'Э', 'Ы', 'У', 'Ю', 'Я'};
 
-        for (char vowel: vowels) {
+    public static boolean VowelByArrayLoop (char c) {
+        c = Character.toUpperCase(c);
+        for (char vowel: VOWELS) {
             if (c == vowel) return true;
         }
         return false;
@@ -53,10 +52,8 @@ public class Main {
 
     public static boolean VowelByIf (char c) {
         c = Character.toUpperCase(c);
-        if ((c == 'А') || (c == 'О') || (c == 'И') || (c == 'Е') || (c == 'Ё') ||
-            (c == 'Э') || (c == 'Ы') || (c == 'У') || (c == 'Ю') || (c == 'Я'))
-            return true;
-        return false;
+        return (c == 'А') || (c == 'О') || (c == 'И') || (c == 'Е') || (c == 'Ё') ||
+               (c == 'Э') || (c == 'Ы') || (c == 'У') || (c == 'Ю') || (c == 'Я');
     }
 
     public static boolean VowelBySwitch (char c) {
@@ -78,20 +75,11 @@ public class Main {
     }
 
     public static boolean VowelBySet (char c) {
-        HashSet<Character> vowels = new HashSet<>();
-        vowels.add('А');
-        vowels.add('О');
-        vowels.add('И');
-        vowels.add('Е');
-        vowels.add('Ё');
-        vowels.add('Э');
-        vowels.add('Ы');
-        vowels.add('У');
-        vowels.add('Ю');
-        vowels.add('Я');
-        if (vowels.contains(Character.toUpperCase(c))) return true;
-        return false;
+        HashSet<Character> vowelSet = new HashSet<>();
+        for (char vowel: VOWELS) vowelSet.add(vowel);
+        return vowelSet.contains(Character.toUpperCase(c));
     }
+
 
     /* 4) Заданы три целых числа, которые задают некоторую дату по Грегорианскому
     календарю (https://ru.wikipedia.org/wiki/Григорианский_календарь). Определить
@@ -103,24 +91,30 @@ public class Main {
              годы, кратные 4 и 100 – невисокосные (например, 1700, 1800, 1900);
              годы, кратные 4, 100 и 400 – високосные (например, 1600, 2000, 2400). */
 
-    public static String NextDay(int day, int month, int year) {
-        boolean leap = false;
-        if (year % 4 == 0) leap = true;
+    public static boolean LeapYear (int year) {
+        if (year % 4 != 0) return false;
+        if (year % 100 != 0) return true;
+        if (year % 400 != 0) return false;
+        return true;
+    }
 
-        int maxDay = 0;
+    public static int MonthMaxDay (int month, boolean leapYear) {
         switch (month) {
             case 4:
             case 6:
             case 9:
             case 11:
-                maxDay = 30;
-                break;
+                return 30;
             case 2:
-                maxDay = (leap) ? 29 : 28;
-                break;
-            default: maxDay = 31;
+                return (leapYear) ? 29 : 28;
+            default: return 31;
         }
+    }
 
+    public static int [] NextDayDate(int day, int month, int year) {
+        if (day < 1 || month < 1 || month > 12) return null;
+        int maxDay = MonthMaxDay(month, LeapYear(year));
+        if (day > maxDay) return null;
         if (++day > maxDay) {
             day = 1;
             if (++month > 12) {
@@ -128,43 +122,22 @@ public class Main {
                 year++;
             }
         }
-        return day + "/" + month + "/" + year;
+        return new int[] {day, month, year};
     }
 
-    public static void Test (Object testFunc, Object input, Object expect) {
-        System.out.println("Input: " + input + "\t|\t" +
-                           "Expected: " + expect + "\t|\t" +
-                           "Actual Result: " + testFunc);
-    }
 
     public static void main(String[] args) {
         System.out.println("Task #2");
-        Test(DragonHeadsCount(963), 963, true);
-        Test(DragonHeadsCount(0), 0, 3);
-        Test(DragonHeadsCount(1), 1, 6);
-        Test(DragonEyesCount(963), 963, 2932);
-        Test(DragonEyesCount(0), 0, 6);
-        Test(DragonEyesCount(1), 1, 12);
+        Test.dragonHeadsCount();
+        Test.dragonEyesCount();
+        System.out.println("Test Passed!");
 
         System.out.println("\nTask #3");
-        System.out.println("\t\t\t\t\tUsing Array Loop");
-        Test(VowelByArrayLoop('о'), 'о', true);
-        Test(VowelByArrayLoop('Г'), 'Г', false);
-        System.out.println("\t\t\t\t\tUsing If Statement");
-        Test(VowelByIf('о'), 'о', true);
-        Test(VowelByIf('Г'), 'Г', false);
-        System.out.println("\t\t\t\t\tUsing Switch/Case");
-        Test(VowelBySwitch('о'), 'о', true);
-        Test(VowelBySwitch('Г'), 'Г', false);
-        System.out.println("\t\t\t\t\tUsing Set");
-        Test(VowelBySet('о'), 'о', true);
-        Test(VowelBySet('Г'), 'Г', false);
+        Test.vowel();
+        System.out.println("Test Passed!");
 
         System.out.println("\nTask #4");
-        System.out.println(NextDay(31,12,2018));
-        System.out.println(NextDay(28,2,2016));
-        System.out.println(NextDay(29,2,2016));
-        System.out.println(NextDay(30,6,2019));
-        System.out.println(NextDay(3,7,2019));
+        Test.nextDayDate();
+        System.out.println("Test Passed!");
     }
 }
