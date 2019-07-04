@@ -3,9 +3,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class Test {
 
     void triangleVertex() {
+        //assertEquals(0, Main.TriangleVertex());
     }
 
-    void rightTriangleVertex() {
+    static void rightTriangleVertex() {
+        assertTrue(Main.RightTriangleVertex(1, 1, -2, -5, 3, 0));
+        assertFalse(Main.RightTriangleVertex(2, 2, 3, -1, -3, -2));
     }
 
     static void dragonHeadsCount() {
@@ -29,8 +32,8 @@ class Test {
         assertTrue(Main.VowelBySwitch('о'));
         assertFalse(Main.VowelBySwitch('Г'));
 
-        assertTrue(Main.VowelByIf('о'));
-        assertFalse(Main.VowelByIf('Г'));
+        assertTrue(Main.VowelByComparing('о'));
+        assertFalse(Main.VowelByComparing('Г'));
 
         assertTrue(Main.VowelBySet('о'));
         assertFalse(Main.VowelBySet('Г'));

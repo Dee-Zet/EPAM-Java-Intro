@@ -7,10 +7,20 @@ public class Main {
     Определить, являются ли данные точки вершинами треугольника. И если да, то
     дополнительно определить, является ли данный треугольник прямоугольным. */
 
-    public static boolean TriangleVertex (int x1, int y1, int x2, int y2, int x3, int y3) { return true; }
+    public static boolean TriangleVertex (double x1, double y1, double x2, double y2, double x3, double y3) {
+        return !(Math.abs((y1 - y2) * (x1 - x3) - (y1 - y3) * (x1 - x2)) <= 1e-9);
+    }
 
-    public static boolean RightTriangleVertex (int x1, int y1, int x2, int y2, int x3, int y3) {
-        return true;
+    public static boolean RightTriangleVertex (double x1, double y1, double x2, double y2, double x3, double y3) {
+        if (TriangleVertex(x1, y1, x2, y2, x3, y3)) {
+            double a = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+            double b = (x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2);
+            double c = (x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1);
+            if (a >= b && a >= c) return Math.abs(a - b - c) <= 1e-9;
+            if (b >= a && b >= c) return Math.abs(b - a - c) <= 1e-9;
+            return Math.abs(c - a - b) <= 1e-9;
+        }
+        return false;
     }
 
 
@@ -50,7 +60,7 @@ public class Main {
         return false;
     }
 
-    public static boolean VowelByIf (char c) {
+    public static boolean VowelByComparing(char c) {
         c = Character.toUpperCase(c);
         return (c == 'А') || (c == 'О') || (c == 'И') || (c == 'Е') || (c == 'Ё') ||
                (c == 'Э') || (c == 'Ы') || (c == 'У') || (c == 'Ю') || (c == 'Я');
@@ -127,7 +137,11 @@ public class Main {
 
 
     public static void main(String[] args) {
-        System.out.println("Task #2");
+        System.out.println("Task #1");
+        Test.rightTriangleVertex();
+        System.out.println("Test Passed!");
+
+        System.out.println("\nTask #2");
         Test.dragonHeadsCount();
         Test.dragonEyesCount();
         System.out.println("Test Passed!");
