@@ -7,18 +7,23 @@ public class Main {
     Определить, являются ли данные точки вершинами треугольника. И если да, то
     дополнительно определить, является ли данный треугольник прямоугольным. */
 
+    private static final double DELTA = 1e-9;
+
     public static boolean TriangleVertex (double x1, double y1, double x2, double y2, double x3, double y3) {
-        return !(Math.abs((y1 - y2) * (x1 - x3) - (y1 - y3) * (x1 - x2)) <= 1e-9);
+        return !(Math.abs((y1 - y2) * (x1 - x3) - (y1 - y3) * (x1 - x2)) <= DELTA); //points not collinear
     }
 
     public static boolean RightTriangleVertex (double x1, double y1, double x2, double y2, double x3, double y3) {
         if (TriangleVertex(x1, y1, x2, y2, x3, y3)) {
-            double a = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
-            double b = (x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2);
-            double c = (x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1);
-            if (a >= b && a >= c) return Math.abs(a - b - c) <= 1e-9;
-            if (b >= a && b >= c) return Math.abs(b - a - c) <= 1e-9;
-            return Math.abs(c - a - b) <= 1e-9;
+            double sideA = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+            double sideB = (x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2);
+            double sideC = (x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1);
+
+            //Now need to compare the largest side with two other sides.
+            //Using float delta is needed. E.g. 1e-9 (0.000000001).
+            if (sideA >= sideB && sideA >= sideC) return Math.abs(sideA - sideB - sideC) <= DELTA;
+            if (sideB >= sideA && sideB >= sideC) return Math.abs(sideB - sideA - sideC) <= DELTA;
+            return Math.abs(sideC - sideA - sideB) <= DELTA;
         }
         return false;
     }

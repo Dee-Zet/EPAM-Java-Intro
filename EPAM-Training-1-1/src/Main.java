@@ -28,6 +28,7 @@ public class Main {
     R1, а внутренний радиус равен R2. */
 
     public static double RingSquare (double R1, double R2) {
+        if (R1 <= R2) return 0;
         double S1 = Math.PI * R1 * R1;
         double S2 = Math.PI * R2 * R2;
         return S1 - S2;
