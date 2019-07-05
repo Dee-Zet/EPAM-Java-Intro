@@ -2,8 +2,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Test {
 
-    void triangleVertex() {
-        //assertEquals(0, Main.TriangleVertex());
+    static void triangleVertex() {
+        assertTrue(Main.TriangleVertex(1, 1, -2, -5, 3, 0));
     }
 
     static void rightTriangleVertex() {
@@ -39,6 +39,9 @@ class Test {
         assertFalse(Main.VowelBySet('Г'));
     }
 
+    // Returns array of ints {day, month, year}
+    // Able to handle b.c. years as negative number, e.g. 1000 b.c -> -1000
+    // Returns null if day or month is out of range
     static void nextDayDate() {
         assertArrayEquals(new int[] {1, 1, 2019}, Main.NextDayDate(31,12,2018));
         assertArrayEquals(new int[] {29, 2, 2016}, Main.NextDayDate(28,2,2016));

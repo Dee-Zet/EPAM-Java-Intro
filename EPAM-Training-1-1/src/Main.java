@@ -28,7 +28,9 @@ public class Main {
     R1, а внутренний радиус равен R2. */
 
     public static double RingSquare (double R1, double R2) {
-        if (R1 <= R2) return 0;
+        if (R1 < 0 || R2 < 0 || R1 <= R2 ) {
+            return 0;
+        }
         double S1 = Math.PI * R1 * R1;
         double S2 = Math.PI * R2 * R2;
         return S1 - S2;
@@ -41,22 +43,34 @@ public class Main {
     неравенству: 1 > 3 > 5 > 7, т.е. идут в порядке возрастания). */
 
     public static boolean DigitsSorted (int n) {
-        if (n < 0) n = Math.abs(n);
-        if (n < 100) return true;
+        n = Math.abs(n);
+
+        if (n < 100) {
+            return true;                        // 2 digits are always sorted
+        }
 
         int mod = n % 10;
         n /= 10;
-        if (mod == n % 10) return false; //means two last digits are same
+        if (mod == n % 10) {
+            return false;                       // means two last digits are same (sequence is not raising/falling)
+        }
 
         boolean ascending = true;
-        if (n % 10 > mod) ascending = false;
+        if (n % 10 > mod) {                     // determining if sequence of digits is raising or falling
+            ascending = false;
+        }
+
         while (n > 10) {
             mod = n % 10;
             n /= 10;
             if (ascending) {
-                if (n % 10 >= mod) return false;
+                if (n % 10 >= mod) {
+                    return false;
+                }
             } else {
-                if (n % 10 <= mod) return false;
+                if (n % 10 <= mod) {
+                    return false;
+                }
             }
         }
         return true;
@@ -66,8 +80,11 @@ public class Main {
     /* 5) Написать программу, которая находит арифметическое и геометрическое среднее цифр шестизначного числа N. */
 
     public static float DigitsArithmeticMean (int n) {
-        if (n < 0) n = Math.abs(n);
-        if (n < 10) return n;
+        n = Math.abs(n);
+
+        if (n < 10) {
+            return n;                           // sequence of 1 digit is average of itself
+        }
 
         int sum = n % 10;
         int i = 1;
@@ -80,8 +97,11 @@ public class Main {
     }
 
     public static double DigitsGeometricMean (int n) {
-        if (n < 0) n = Math.abs(n);
-        if (n < 10) return n;
+        n = Math.abs(n);
+
+        if (n < 10) {
+            return n;
+        }
 
         int product = n % 10;
         int i = 1;
@@ -98,8 +118,11 @@ public class Main {
     число N (к примеру, число 1234567 реверсируется в число 7654321). */
 
     public static int ReverseNumber (int n) {
-        if (Math.abs(n) < 10) return n;
-        boolean negative = false;
+        if (Math.abs(n) < 10) {                 // no need to reverse if it's 1 digit number
+            return n;
+        }
+
+        boolean negative = false;               // to keep original sign
         if (n < 0) {
             n = Math.abs(n);
             negative = true;
@@ -139,7 +162,7 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    private static void RunTest() {
         System.out.println("Task #1");
         Test.abcEqual();
         System.out.println("Test Passed!");
@@ -170,5 +193,9 @@ public class Main {
         System.out.println("\nTask #7");
         SwitchAB();
         System.out.println("\nJob Done!");
+    }
+
+    public static void main(String[] args) {
+        RunTest();
     }
 }

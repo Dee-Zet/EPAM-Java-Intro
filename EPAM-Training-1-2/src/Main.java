@@ -21,11 +21,17 @@ public class Main {
 
             //Now need to compare the largest side with two other sides.
             //Using float delta is needed. E.g. 1e-9 (0.000000001).
-            if (sideA >= sideB && sideA >= sideC) return Math.abs(sideA - sideB - sideC) <= DELTA;
-            if (sideB >= sideA && sideB >= sideC) return Math.abs(sideB - sideA - sideC) <= DELTA;
-            return Math.abs(sideC - sideA - sideB) <= DELTA;
+            if (sideA >= sideB && sideA >= sideC) {
+                return Math.abs(sideA - sideB - sideC) <= DELTA;
+            } else
+            if (sideB >= sideA && sideB >= sideC) {
+                return Math.abs(sideB - sideA - sideC) <= DELTA;
+            } else {
+                return Math.abs(sideC - sideA - sideB) <= DELTA;
+            }
+        } else {
+            return false;
         }
-        return false;
     }
 
 
@@ -40,10 +46,17 @@ public class Main {
     private static final int HEADS_BY_300YS = 800 + HEADS_BY_BIRTH;
 
     public static int DragonHeadsCount (int age) {
-        if (age < 0) return 0;
-        if (age > 300) return HEADS_BY_300YS + (age - 300);
-        if (age > 200) return HEADS_BY_200YS + (age - 200);
-        return age * 3 + HEADS_BY_BIRTH;
+        if (age < 0) {
+            return 0;
+        } else
+        if (age > 300) {
+            return HEADS_BY_300YS + (age - 300);
+        } else
+        if (age > 200) {
+            return HEADS_BY_200YS + (age - 200);
+        } else {
+            return age * 3 + HEADS_BY_BIRTH;
+        }
     }
 
     public static int DragonEyesCount (int age) {
@@ -56,11 +69,14 @@ public class Main {
     разрешается и больше). */
 
     private static final char [] VOWELS = {'А', 'О', 'И', 'Е', 'Ё', 'Э', 'Ы', 'У', 'Ю', 'Я'};
+    private static final HashSet<Character> vowelSet = new HashSet<>();
 
     public static boolean VowelByArrayLoop (char c) {
         c = Character.toUpperCase(c);
         for (char vowel: VOWELS) {
-            if (c == vowel) return true;
+            if (c == vowel) {
+                return true;
+            }
         }
         return false;
     }
@@ -90,8 +106,6 @@ public class Main {
     }
 
     public static boolean VowelBySet (char c) {
-        HashSet<Character> vowelSet = new HashSet<>();
-        for (char vowel: VOWELS) vowelSet.add(vowel);
         return vowelSet.contains(Character.toUpperCase(c));
     }
 
@@ -107,10 +121,14 @@ public class Main {
              годы, кратные 4, 100 и 400 – високосные (например, 1600, 2000, 2400). */
 
     public static boolean LeapYear (int year) {
-        if (year % 4 != 0) return false;
-        if (year % 100 != 0) return true;
-        if (year % 400 != 0) return false;
-        return true;
+        if (year % 4 != 0) {
+            return false;
+        } else
+        if (year % 100 != 0) {
+            return true;
+        } else {
+            return year % 400 == 0;
+        }
     }
 
     public static int MonthMaxDay (int month, boolean leapYear) {
@@ -127,7 +145,9 @@ public class Main {
     }
 
     public static int [] NextDayDate(int day, int month, int year) {
-        if (day < 1 || month < 1 || month > 12) return null;
+        if (day < 1 || month < 1 || month > 12) {
+            return null;
+        }
         int maxDay = MonthMaxDay(month, LeapYear(year));
         if (day > maxDay) return null;
         if (++day > maxDay) {
@@ -141,8 +161,9 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    private static void RunTest() {
         System.out.println("Task #1");
+        Test.triangleVertex();
         Test.rightTriangleVertex();
         System.out.println("Test Passed!");
 
@@ -152,11 +173,18 @@ public class Main {
         System.out.println("Test Passed!");
 
         System.out.println("\nTask #3");
+        for (char vowel: VOWELS) {
+            vowelSet.add(vowel);
+        }
         Test.vowel();
         System.out.println("Test Passed!");
 
         System.out.println("\nTask #4");
         Test.nextDayDate();
         System.out.println("Test Passed!");
+    }
+
+    public static void main(String[] args) {
+        RunTest();
     }
 }
