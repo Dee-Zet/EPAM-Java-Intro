@@ -30,10 +30,11 @@ public class Main {
     public static double RingSquare (double R1, double R2) {
         if (R1 < 0 || R2 < 0 || R1 <= R2 ) {
             return 0;
+        } else {
+            double S1 = Math.PI * R1 * R1;
+            double S2 = Math.PI * R2 * R2;
+            return S1 - S2;
         }
-        double S1 = Math.PI * R1 * R1;
-        double S2 = Math.PI * R2 * R2;
-        return S1 - S2;
     }
 
 
@@ -44,36 +45,20 @@ public class Main {
 
     public static boolean DigitsSorted (int n) {
         n = Math.abs(n);
-
-        if (n < 100) {
-            return true;                        // 2 digits are always sorted
-        }
-
         int mod = n % 10;
         n /= 10;
-        if (mod == n % 10) {
-            return false;                       // means two last digits are same (sequence is not raising/falling)
-        }
-
-        boolean ascending = true;
         if (n % 10 > mod) {                     // determining if sequence of digits is raising or falling
-            ascending = false;
-        }
-
-        while (n > 10) {
-            mod = n % 10;
-            n /= 10;
-            if (ascending) {
-                if (n % 10 >= mod) {
-                    return false;
-                }
-            } else {
-                if (n % 10 <= mod) {
-                    return false;
-                }
+            while (n % 10 > mod) {
+                mod = n % 10;
+                n /= 10;
+            }
+        } else {
+            while (n % 10 < mod) {
+                mod = n % 10;
+                n /= 10;
             }
         }
-        return true;
+        return n == 0;                          // true if all digits were handled
     }
 
 
