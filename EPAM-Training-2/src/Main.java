@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -15,31 +14,36 @@ public class Main {
         return reversedN;
     }
 
-    static int Sum (ArrayList<Integer> adds) {
+    static int ProperDivisorsSum(int n) {   // Сумма собственных делителей
         int sum = 0;
-        for (int i : adds) {
-            sum = sum + i;
+        if (n > 1) {
+            sum++;
+            for (int i = 1; i <= Math.sqrt(n); i++) {
+                if (n % i == 0 && i != n && n / i != n) {
+                    if (n / i != i) {   // if divisors are different
+                        sum += n / i;   // add both
+                    }
+                    sum += i;           // if equal, add only one
+                }
+            }
         }
         return sum;
     }
 
-    static ArrayList<Integer> ProperDividers (int n) {
-        ArrayList<Integer> dividers = new ArrayList<>();
+    static int ProperDivisorsCount(int n) { // Количество собственных делителей
+        int count = 0;
         if (n > 1) {
-            dividers.add(1);
+            count++;
             for (int i = 1; i <= Math.sqrt(n); i++) {
                 if (n % i == 0 && i != n && n / i != n) {
-                    // If divisors are equal, add only one
-                    if (n / i == i) {
-                        dividers.add(i);
-                    } else { // Otherwise add both
-                        dividers.add(i);
-                        dividers.add(n / i);
+                    if (n / i != i) {   // if divisors are different
+                        count++;        // add both
                     }
+                    count++;            // if equal, add only one
                 }
             }
         }
-        return dividers;
+        return count;
     }
 
     /* 1) Необходимо написать программу «Heads or Tails?» («Орёл или решка?»),
@@ -86,26 +90,23 @@ public class Main {
     }
 
     static boolean PrimeNumber (int n) {
-        if (n > 1) {
-            return ProperDividers(n).size() == 1;
-        } else {
-            return false;
-        }
+        return ProperDivisorsCount(n) == 1;
     }
 
-    static ArrayList<Integer> PrimeDividers (int n) {
-        ArrayList<Integer> primeDividers = new ArrayList<>();
+    static void PrimeDivisors(int n) {  // Все простые множители
         if (n > 1) {
-            for (int divider : ProperDividers(n)) {
-                if (PrimeNumber(divider)) {
-                    primeDividers.add(divider);
+            for (int i = 1; i <= Math.sqrt(n); i++) {
+                if (n % i == 0 && i != n && n / i != n) {
+                    if (n / i != i && PrimeNumber(n / i)) { // if divisors are different
+                        System.out.print(n / i + " ");
+                    } else {
+                        if (PrimeNumber(i)) {
+                            System.out.print(i + " ");
+                        }
+                    }
                 }
             }
-            if (PrimeNumber(n)) {
-                primeDividers.add(n);
-            }
         }
-        return primeDividers;
     }
 
     static int GCD (int a, int b) { //HOD
@@ -146,22 +147,29 @@ public class Main {
     программы приводится список некоторых совершенных чисел: 6, 28, 496, 8128. */
 
     static boolean PerfectNumber (int n) {
-        return n == Sum(ProperDividers(n));
+        return n == ProperDivisorsSum(n);
     }
 
-    /* 4) Дру́жественные чи́сла — два различных натуральных числа , для которых
+    /* 4) Дружественные числа — два различных натуральных числа , для которых
     сумма всех собственных делителей первого числа равна второму числу и
     наоборот, сумма всех собственных делителей второго числа равна первому
     числу. Дружественные числа были открыты последователями Пифагора ,
     которые, однако, знали только одну пару дружественных чисел – 220 и 284.
     Найдите все дружественные числа в заданном диапазоне. */
 
-    static boolean NumbersAmicable (int n1, int n2) {
-        return n1 == Sum(ProperDividers(n2)) && n2 == Sum(ProperDividers(n1));
+    static void AmicableNumbersInRange (int start, int end) {
+        for (int i = start; i <= end; i++) {
+            int divisorsSum = ProperDivisorsSum(i);
+            for (int j = i + 1; j <= end && i != j; j++) {
+                if (divisorsSum == j && ProperDivisorsSum(j) == i ) {
+                    System.out.println("Numbers " + i + " and " + j + " are amicable.");
+                }
+            }
+        }
     }
 
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
 
         // 1
         int iterations = 1000;
@@ -175,15 +183,12 @@ public class Main {
         System.out.println( Palindrome(12721) );
         System.out.println( Palindrome(12742) );
         System.out.println( PrimeNumber(12742) );
-        System.out.println( PrimeDividers(12742) );
+        PrimeDivisors(12742);
+        System.out.println();
         System.out.println( GCD(1071, 462) );
         System.out.println( LCM(16, 20) );
         System.out.println( UniqueDigits(12742) );
         System.out.println( UniqueDigits(1111111111) );
-        /*for (int i = 0; i < 200; i++) {
-            if (PrimeNumber(i))
-                System.out.println( i );
-        }*/
 
         // 3
         System.out.println("\nTask #3");
@@ -195,6 +200,6 @@ public class Main {
 
         // 4
         System.out.println("\nTask #4");
-        System.out.println( NumbersAmicable(220, 284) );
+        AmicableNumbersInRange(1, 20000);
     }
 }
