@@ -1,0 +1,2 @@
+Used IntelliJ IDEA 2019 and junit5 library for tests. You can configure junit like this: https://www.jetbrains.com/help/idea/configuring-testing-libraries.html .
+You can also delete Test.class file and RunTest() function and write your own tests in main() function.
