@@ -29,13 +29,9 @@ class Test {
     static void digitsSorted() { // Takes positive/negative int
         assertTrue(Main.DigitsSorted(1357));
         assertTrue(Main.DigitsSorted(7531));
-        assertTrue(Main.DigitsSorted(43210));
-        assertTrue(Main.DigitsSorted(10));
-        assertTrue(Main.DigitsSorted(1));
         assertFalse(Main.DigitsSorted(1355));
         assertFalse(Main.DigitsSorted(5743));
         assertFalse(Main.DigitsSorted(100));
-        assertFalse(Main.DigitsSorted(11));
     }
 
     static void digitsArithmeticMean() { // Takes positive/negative int
