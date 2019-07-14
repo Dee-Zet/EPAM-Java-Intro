@@ -4,6 +4,7 @@ class Test {
 
     static void triangleVertex() {
         assertTrue(Main.TriangleVertex(1, 1, -2, -5, 3, 0));
+        assertFalse(Main.TriangleVertex(1, 1, 1, 1, 3, 0));
     }
 
     static void rightTriangleVertex() {
