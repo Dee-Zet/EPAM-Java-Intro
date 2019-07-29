@@ -12,7 +12,7 @@ class Task3_2 {
 
         boolean repeat = false;
         double minValue = matrix[0][0];                 // had to initialize minValue in function body
-        for (int i = 1; i < matrix[0].length; i++) {    // and pass the first string of a matrix
+        for (int i = 1; i < matrix[0].length; i++) {    // and pass the first row of a matrix
             if (matrix[0][i] < minValue) {
                 minValue = matrix[0][i];
                 repeat = false;
@@ -37,12 +37,12 @@ class Task3_2 {
 
     static double findMatrixMaxValue (double [][] matrix) {
         if (matrix.length == 0 || matrix[0].length == 0) {
-            return -1;
+            return Double.NaN;
         }
 
         boolean repeat = false;
         double maxValue = matrix[0][0];                 // had to initialize maxValue in function body
-        for (int i = 1; i < matrix[0].length; i++) {    // and pass the first string of a matrix
+        for (int i = 1; i < matrix[0].length; i++) {    // and pass the first row of a matrix
             if (matrix[0][i] > maxValue) {
                 maxValue = matrix[0][i];
                 repeat = false;
@@ -82,12 +82,15 @@ class Task3_2 {
                         if (vectorMean == 0) {  // if   geom. mean of vector = 0,
                             return 0;           // then geom. mean of matrix = 0
                         }
+                        if (vectorMean == Double.NaN || vectorMean < 0) {
+                            return Double.NaN;
+                        }
                         prod *= vectorMean;
                     }
                     return Math.pow(prod, 1f / matrix.length);
             }
         }
-        return -1;
+        return Double.NaN;
     }
 
 

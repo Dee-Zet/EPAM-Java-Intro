@@ -1,17 +1,25 @@
 package task3;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 
 class Task3_1 {
+
+    private static final Logger log = Logger.getLogger(Task3_1.class);
+
     // Задан вектор размера N. Необходимо выполнить следующие действия:
 
     /* найти индекс экстремального значения (минимальный и максимальный
     элементы) данного вектора, если таких элементов нет, то возвратить -1; */
 
-    static int findVectorMinValueId (double [] vector) {
+    static int findVectorMinValueId (double[] vector) {
         if (vector.length == 0) {
+            log.debug("Input array length = 0");
             return -1;
         }
+
+        log.debug("Input array: " + Arrays.toString(vector));
 
         double minValue = vector[0];
         int valueId = -1;
@@ -23,13 +31,17 @@ class Task3_1 {
                 valueId = -1;
             }
         }
+        log.debug("Array min value = " + valueId);
         return valueId;
     }
 
-    static double findVectorMaxValueId (double [] vector) {
+    static int findVectorMaxValueId (double[] vector) {
         if (vector.length == 0) {
+            log.debug("Input array length = 0");
             return -1;
         }
+
+        log.debug("Input array: " + Arrays.toString(vector));
 
         double maxValue = vector[0];
         int valueId = -1;
@@ -41,6 +53,7 @@ class Task3_1 {
                 valueId = -1;
             }
         }
+        log.debug("Array min value = " + valueId);
         return valueId;
     }
 
@@ -49,8 +62,9 @@ class Task3_1 {
 
     enum mean_type {ARITHMETIC, GEOMETRIC}
 
-    static double findVectorMean (double [] vector, mean_type type) {
+    static double findVectorMean (double[] vector, mean_type type) {
         if (vector.length > 0) {
+            log.debug("Input array: " + Arrays.toString(vector));
             switch (type) {
                 case ARITHMETIC:
                     double sum = 0;
@@ -66,19 +80,30 @@ class Task3_1 {
                         }
                         prod *= value;
                     }
+
+                    if (prod < 0) {
+                        if (vector.length % 2 == 1) {
+                            return -Math.pow(-prod, 1f / vector.length);
+                        } else {                        // if product is negative and numbers count is even
+                            return Double.NaN;          // it's impossible to replace all numbers with one average
+                        }
+                    }
                     return Math.pow(prod, 1f / vector.length);
             }
         }
-        return -1;
+        log.debug("Input array length = 0");
+        return Double.NaN;
     }
 
     /* проверить, находятся ли все элементы вектора в упорядоченном виде (т.е.
     отсортированы ли элементы по возрастанию или убыванию); */
 
-    static boolean isVectorSorted (double [] vector) {
+    static boolean isVectorSorted (double[] vector) {
         if (vector.length == 0) {
+            log.debug("Input array length = 0");
             return false;
         }
+        log.debug("Input array: " + Arrays.toString(vector));
 
         if (vector.length < 3) {
             return true;
@@ -111,10 +136,11 @@ class Task3_1 {
     который меньше любого из своих соседей; локальный максимум – это элемент,
     который больше любого из своих соседей); */
 
-    static int findVectorLocalMinId (double [] vector) {
+    static int findVectorLocalMinId (double[] vector) {
         if (vector.length < 3) {
             return -1;
         }
+        log.debug("Input array: " + Arrays.toString(vector));
 
         int stopId = vector.length - 1;
         for (int i = 1; i < stopId; i++) {
@@ -125,10 +151,11 @@ class Task3_1 {
         return -1;
     }
 
-    static int findVectorLocalMaxId (double [] vector) {
+    static int findVectorLocalMaxId (double[] vector) {
         if (vector.length < 3) {
             return -1;
         }
+        log.debug("Input array: " + Arrays.toString(vector));
 
         int stopId = vector.length - 1;
         for (int i = 1; i < stopId; i++) {
@@ -136,6 +163,7 @@ class Task3_1 {
                 return i;
             }
         }
+        log.debug("Vector passed. No appropriate result");
         return -1;
     }
 
@@ -143,16 +171,19 @@ class Task3_1 {
     последовательный (linear or sequential search) и двоичный или бинарный (binary
     search); */
 
-    static int linearVectorSearch (double [] vector, double queryValue) {
+    static int linearVectorSearch (double[] vector, double queryValue) {
+        log.debug("Input array: " + Arrays.toString(vector) + " Search query: " + queryValue);
         for (int i = 0; i < vector.length; i++) {
             if (vector[i] == queryValue) {
                 return i;
             }
         }
+        log.debug("Vector passed. No appropriate result");
         return -1;
     }
 
-    static int binaryVectorSearch (double [] vector, double queryValue) { // finds leftmost
+    static int binaryVectorSearch (double[] vector, double queryValue) { // finds leftmost
+        log.debug("Input array: " + Arrays.toString(vector) + " Search query: " + queryValue);
         int LeftBnd = 0;
         int RightBnd = vector.length;
         while (LeftBnd < RightBnd) {
@@ -169,7 +200,8 @@ class Task3_1 {
     /* реверсировать все элементы вектора (при решении данного задания не
     рекомендуется задействовать дополнительную память); */
 
-    static void reverseVector (double [] vector) {
+    static void reverseVector (double[] vector) {
+        log.debug("Input array: " + Arrays.toString(vector));
         int stopId = vector.length / 2;
         int lastId = vector.length - 1;
         for (int i = 0; i < stopId; i++) {
@@ -177,6 +209,7 @@ class Task3_1 {
             vector[i] = vector[lastId - i];
             vector[lastId - i] = t;
         }
+        log.debug("Output array: " + Arrays.toString(vector));
     }
 
     /* реализовать несколько алгоритмов сортировок элементов вектора по
@@ -185,9 +218,7 @@ class Task3_1 {
     также её улучшенные версии; сортировка вставками (insertion sort); сортировка
     выбором (selection sort); сортировка слиянием (merge sort) и быстрая сортировка (quick sort). */
 
-    enum sort_type {BUBBLE, INSERTION, SELECTION, MERGE, QUICK}
-
-    private static void bubbleSort (double [] vector) {
+    static void bubbleSort (double[] vector) {
         int N = vector.length;
         do {
             int newN = 0;
@@ -203,7 +234,7 @@ class Task3_1 {
         } while (N > 0);
     }
 
-    static void insertionSort (double [] vector) {
+    static void insertionSort (double[] vector) {
         int i = 1;
         while (i < vector.length) {
             int j = i;
@@ -217,7 +248,7 @@ class Task3_1 {
         }
     }
 
-    static void selectionSort (double [] vector) {
+    static void selectionSort (double[] vector) {
         for (int i = 0; i < vector.length - 1; i++)
         {
             int min = i;
@@ -239,13 +270,13 @@ class Task3_1 {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
-    static void mergeSort (double [] vector) { // method for calling without specifying array bounds
+    static void mergeSort (double[] vector) { // method for calling without specifying array bounds
         if (vector.length > 1) {
             mergeSort(vector, 0, vector.length - 1);
         }
     }
 
-    private static void mergeSort (double [] vector, int bgn, int end) { // private method for recursion
+    private static void mergeSort (double[] vector, int bgn, int end) { // private method for recursion
         if (bgn < end)
         {
             // Find the middle point
@@ -260,7 +291,7 @@ class Task3_1 {
         }
     }
 
-    private static void merge(double [] vector, int bgn, int mid, int end)
+    private static void merge(double[] vector, int bgn, int mid, int end)
     {
         double [] L = Arrays.copyOfRange(vector, bgn, mid + 1);
         double [] R = Arrays.copyOfRange(vector, mid + 1, end + 1);
@@ -294,7 +325,7 @@ class Task3_1 {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
-    static void quickSort (double [] vector) { // method for calling without specifying array bounds
+    static void quickSort (double[] vector) { // method for calling without specifying array bounds
         if (vector.length > 1) {
             int p = qsPartition(vector, 0, vector.length - 1);
             quickSort(vector, 0, p - 1);
@@ -302,7 +333,7 @@ class Task3_1 {
         }
     }
 
-    private static void quickSort (double [] vector, int lo, int hi) { // private method for recursion
+    private static void quickSort (double[] vector, int lo, int hi) { // private method for recursion
         if (lo < hi) {
             int p = qsPartition(vector, lo, hi);
             quickSort(vector, lo, p - 1);
@@ -310,7 +341,7 @@ class Task3_1 {
         }
     }
 
-    private static int qsPartition (double [] vector, int lo, int hi) {
+    private static int qsPartition (double[] vector, int lo, int hi) {
         double buf = 0;
 
         // choosing median-of-3 pivot
@@ -350,7 +381,9 @@ class Task3_1 {
         }
     }
 
-    static void sortVector (double [] vector, sort_type type) {
+    enum sort_type {BUBBLE, INSERTION, SELECTION, MERGE, QUICK}
+
+    static void sortVector (double[] vector, sort_type type) {
         switch (type) {
             case BUBBLE: bubbleSort(vector); break;
             case INSERTION: insertionSort(vector); break;
