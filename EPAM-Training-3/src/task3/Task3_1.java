@@ -341,10 +341,8 @@ class Task3_1 {
         }
     }
 
-    private static int qsPartition (double[] vector, int lo, int hi) {
+    private static double qsPivot (double[] vector, int lo, int hi) { // finds median-of-3 pivot
         double buf = 0;
-
-        // choosing median-of-3 pivot
         int mid = (lo + hi) / 2;
         if (vector[mid] < vector[lo]) {
             buf = vector[lo];
@@ -361,8 +359,11 @@ class Task3_1 {
             vector[hi] = vector[mid];
             vector[mid] = buf;
         }
-        double pivot = vector[hi];
+        return vector[hi];
+    }
 
+    private static int qsPartition (double[] vector, int lo, int hi) {
+        double pivot = qsPivot(vector, lo, hi); // choosing median-of-3 pivot
         for (; ; lo++, hi--) {
             while (vector[lo] < pivot) {
                 lo++;
@@ -375,7 +376,7 @@ class Task3_1 {
                 return hi;
             }
 
-            buf = vector[lo];
+            double buf = vector[lo];
             vector[lo] = vector[hi];
             vector[hi] = buf;
         }
