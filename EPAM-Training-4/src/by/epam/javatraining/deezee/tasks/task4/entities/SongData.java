@@ -1,28 +1,33 @@
-package Task4.entity;
+package by.epam.javatraining.deezee.tasks.task4.entities;
+
+import by.epam.javatraining.deezee.tasks.task4.enums.Genre;
 
 public class SongData {
-    private int id;
-    private int duration;
-    private String title;
-    private String artist;
-    private AudioUrl audio;
-    private ImageUrl cover;
+    private String title = "";
+    private String artist = "";
+    private int duration = 0;
     private Genre genre = Genre.UNKNOWN;
 
-    public SongData(String title, String artist, int duration, AudioUrl audio, ImageUrl cover, Genre genre) {
+    public SongData(String title, String artist, int duration, Genre genre) {
         this.title = title;
         this.artist = artist;
         this.duration = duration;
-        this.cover = cover;
-        this.audio = audio;
         this.genre = genre;
-
-        this.id = (int)System.currentTimeMillis() ^ duration;
     }
 
     @Override
+    public String toString() {
+        return new StringBuffer(this.title).append("; ")
+                .append(this.artist).append("; ")
+                .append(this.duration).append("; ")
+                .append(this.genre)
+                .toString();
+    }
+
+    /*@Override
     public int hashCode() {
-        return this.id;
+        //return this.id;
+        return 0;
     }
 
     @Override
@@ -35,8 +40,9 @@ public class SongData {
             return false;
         }
 
-        return (this.id == obj.hashCode());
-    }
+        return false;
+        //return (this.id == obj.hashCode());
+    }*/
 
     public int getDuration() {
         return duration;
@@ -60,22 +66,6 @@ public class SongData {
 
     public void setArtist(String artist) {
         this.artist = artist;
-    }
-
-    public AudioUrl getAudio() {
-        return audio;
-    }
-
-    public void setAudio(AudioUrl audio) {
-        this.audio = audio;
-    }
-
-    public ImageUrl getCover() {
-        return cover;
-    }
-
-    public void setCover(ImageUrl cover) {
-        this.cover = cover;
     }
 
     public Genre getGenre() {
