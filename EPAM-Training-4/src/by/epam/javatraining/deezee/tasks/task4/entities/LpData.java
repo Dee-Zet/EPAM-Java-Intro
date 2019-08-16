@@ -20,4 +20,8 @@ public class LpData extends ReleaseData {
     public void setDiscs(List<List<SongData>> discs) {
         this.discs = discs;
     }
+
+    public int getDiscsCount() {
+        return discs.size();
+    }
 }

@@ -25,3 +25,16 @@
 2019-08-15 23:57:11 ERROR ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 20. Skipping line.
 2019-08-16 00:39:41 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 11. Skipping line.
 2019-08-16 00:45:13 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 11. Skipping line.
+2019-08-16 14:05:16 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 11. Skipping line.
+2019-08-16 14:31:09 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 11. Skipping line.
+2019-08-16 15:19:10 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 19. Skipping line.
+2019-08-16 15:19:10 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 20. Skipping line.
+2019-08-16 15:28:25 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 19. Skipping line.
+2019-08-16 15:28:25 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 20. Skipping line.
+2019-08-16 15:28:25 INFO  ReleaseDeserializer:184 - Release added: LP; When We All Fall Asleep, Where Do We Go?; Billie Eilish; 2019; POP
+2019-08-16 16:02:09 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 19. Skipping line.
+2019-08-16 16:02:09 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 20. Skipping line.
+2019-08-16 16:02:09 INFO  ReleaseDeserializer:184 - Release added: LP; When We All Fall Asleep, Where Do We Go?; Billie Eilish; 2019; POP
+2019-08-16 16:05:19 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 19. Skipping line.
+2019-08-16 16:05:19 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 20. Skipping line.
+2019-08-16 16:05:19 INFO  ReleaseDeserializer:184 - Release added: LP; When We All Fall Asleep, Where Do We Go?; Billie Eilish; 2019; POP

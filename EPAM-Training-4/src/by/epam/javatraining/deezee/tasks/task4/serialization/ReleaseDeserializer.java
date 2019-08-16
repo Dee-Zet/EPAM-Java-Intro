@@ -19,24 +19,24 @@ public class ReleaseDeserializer {
         String[] songProps = songString.split(";");
 
         if (songProps.length == 4) {
-            songProps[0] = songProps[0].trim(); // title
-            songProps[1] = songProps[1].trim(); // artist
-            songProps[2] = songProps[2].trim(); // duration
+            String titleString = songProps[0].trim();
 
-            int songDuration = 0;
+            String artistString = songProps[1].trim();
+
+            String durationString = songProps[2].trim();
+            int durationInt;
             try {
-                songDuration = Integer.parseInt(songProps[2]);
+                durationInt = Integer.parseInt(durationString);
             } catch (Exception e) {
-                //TODO
+                durationInt = 0;
             }
 
             String genreString = "";
             try {
                 genreString = songProps[3].toUpperCase().replaceAll("[^a-zA-Z0-9]+", "");
             } catch (Exception e) {
-                //TODO
+                log.error("Error while parsing song genre.");
             }
-
             Genre genreValue;
             try {
                 genreValue = Genre.valueOf(genreString);
@@ -45,9 +45,9 @@ public class ReleaseDeserializer {
             }
 
             return new SongData(
-                    songProps[0],
-                    songProps[1],
-                    songDuration,
+                    titleString,
+                    artistString,
+                    durationInt,
                     genreValue
             );
         } else {
@@ -85,6 +85,7 @@ public class ReleaseDeserializer {
     }
 
     public static ReleaseData deserialize(String filename) {
+        ReleaseData release = null;
         currentLine = null;
         lineNumber = 0;
 
@@ -139,7 +140,7 @@ public class ReleaseDeserializer {
 
                     switch (releaseTypeValue) {
                         case EP: {
-                            ReleaseData release = new EpData(
+                            release = new EpData(
                                     releaseTypeValue,
                                     titleString,
                                     artistString,
@@ -147,10 +148,10 @@ public class ReleaseDeserializer {
                                     genreValue,
                                     deserializeTracklist(br)
                             );
-                            return release;
+                            break;
                         }
                         case LP: {
-                            ReleaseData release = new LpData(
+                            release = new LpData(
                                     releaseTypeValue,
                                     titleString,
                                     artistString,
@@ -158,10 +159,10 @@ public class ReleaseDeserializer {
                                     genreValue,
                                     deserializeDiscs(br)
                             );
-                            return release;
+                            break;
                         }
                         case SP: {
-                            ReleaseData release = new SingleData(
+                            release = new SingleData(
                                     releaseTypeValue,
                                     titleString,
                                     artistString,
@@ -169,9 +170,8 @@ public class ReleaseDeserializer {
                                     genreValue,
                                     deserializeSong(br.readLine())
                             );
-                            return release;
+                            break;
                         }
-                        default: { }
                     }
                 }
             }
@@ -180,6 +180,11 @@ public class ReleaseDeserializer {
             System.out.println(ex.getMessage());
         }
 
-        return null;
+        if (release != null) {
+            log.info("Release added: " + release.toString());
+        } else {
+            log.error("Unsuccessful release deserialization. Check input file.");
+        }
+        return release;
     }
 }
