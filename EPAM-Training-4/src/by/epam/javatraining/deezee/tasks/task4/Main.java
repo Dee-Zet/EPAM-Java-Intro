@@ -2,6 +2,7 @@ package by.epam.javatraining.deezee.tasks.task4;
 
 import by.epam.javatraining.deezee.tasks.task4.entities.*;
 import by.epam.javatraining.deezee.tasks.task4.enums.SortParameter;
+import by.epam.javatraining.deezee.tasks.task4.exceptions.DeserializationException;
 import by.epam.javatraining.deezee.tasks.task4.serialization.ReleaseDeserializer;
 import by.epam.javatraining.deezee.tasks.task4.serialization.ReleaseSerializer;
 import by.epam.javatraining.deezee.tasks.task4.utils.TracklistSearch;
@@ -26,11 +27,13 @@ public class Main {
                 case 1: {
                     System.out.println("Enter file name:");
                     String filename = reader.next();
-                    ReleaseData release = ReleaseDeserializer.deserialize(filename);
-                    if (release != null) {
+                    try {
+                        ReleaseData release = ReleaseDeserializer.deserialize(filename);
                         releaseCatalog.add(release);
                         System.out.println("Release added:");
                         System.out.println(release.toString());
+                    } catch (DeserializationException de) {
+                        de.printStackTrace(System.out);
                     }
                     break;
                 }

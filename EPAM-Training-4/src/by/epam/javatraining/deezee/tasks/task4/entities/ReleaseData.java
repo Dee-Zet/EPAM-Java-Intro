@@ -33,7 +33,9 @@ public abstract class ReleaseData {
             return false;
         }
 
-        return true;
+        ReleaseData release = (ReleaseData)obj;
+
+        return this.title.equals(release.title) && this.artist.equals(release.artist);
     }
 
     @Override

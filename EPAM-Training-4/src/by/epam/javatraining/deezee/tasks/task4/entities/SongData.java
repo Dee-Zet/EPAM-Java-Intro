@@ -3,10 +3,10 @@ package by.epam.javatraining.deezee.tasks.task4.entities;
 import by.epam.javatraining.deezee.tasks.task4.enums.Genre;
 
 public class SongData {
-    private String title = "";
-    private String artist = "";
-    private int duration = 0;
-    private Genre genre = Genre.UNKNOWN;
+    private String title;
+    private String artist;
+    private int duration;
+    private Genre genre;
 
     public SongData(String title, String artist, int duration, Genre genre) {
         this.title = title;
@@ -28,7 +28,7 @@ public class SongData {
     public int hashCode() {
         //return this.id;
         return 0;
-    }
+    }*/
 
     @Override
     public boolean equals(Object obj) {
@@ -40,9 +40,10 @@ public class SongData {
             return false;
         }
 
-        return false;
-        //return (this.id == obj.hashCode());
-    }*/
+        SongData song = (SongData)obj;
+
+        return this.title.equals(song.title) && this.artist.equals(song.artist) && this.getDuration() == song.duration;
+    }
 
     public int getDuration() {
         return duration;

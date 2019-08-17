@@ -38,3 +38,36 @@
 2019-08-16 16:05:19 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 19. Skipping line.
 2019-08-16 16:05:19 WARN  ReleaseDeserializer:54 - Wrong parameters for SongData constructor in line 20. Skipping line.
 2019-08-16 16:05:19 INFO  ReleaseDeserializer:184 - Release added: LP; When We All Fall Asleep, Where Do We Go?; Billie Eilish; 2019; POP
+2019-08-17 13:09:42 WARN  ReleaseDeserializer:113 - 
+2019-08-17 13:09:42 INFO  ReleaseDeserializer:185 - Release added: SP; 7; Lil Nas X; 2019; HIPHOP
+2019-08-17 13:19:10 WARN  ReleaseDeserializer:113 - No correct release type specified. Will try to deserialize as a single.
+2019-08-17 13:19:10 INFO  ReleaseDeserializer:185 - Release added: SP; 7; Lil Nas X; 2019; HIPHOP
+2019-08-17 13:20:19 WARN  ReleaseDeserializer:113 - No correct release type specified. Will try to deserialize as a single.
+2019-08-17 13:31:16 WARN  ReleaseDeserializer:110 - No correct release type specified. Will try to deserialize as a single.
+2019-08-17 13:31:44 WARN  ReleaseDeserializer:110 - No correct release type specified. Will try to deserialize as a single.
+2019-08-17 13:55:49 WARN  ReleaseDeserializer:114 - No correct release type specified. Will try to deserialize as a single.
+2019-08-17 13:55:49 ERROR ReleaseDeserializer:20 - No parameters for song constructor specified in file.
+2019-08-17 13:55:49 INFO  ReleaseDeserializer:190 - Release added: SP; 7; Lil Nas X; 2019; HIPHOP
+2019-08-17 16:36:07 INFO  ReleaseDeserializer:140 - Release deserialized: SP; Ransom; Lil Tecca; 2019; HIPHOP
+2019-08-17 16:37:39 WARN  ReleaseDeserializer:131 - Wrong parameters for ReleaseData constructor in line 1
+2019-08-17 16:59:06 ERROR ReleaseDeserializer:141 - Stream not marked
+2019-08-17 17:01:19 WARN  ReleaseDeserializer:136 - Wrong parameters for ReleaseData constructor in line 2
+2019-08-17 17:01:59 WARN  ParameterValidator:19 - Unrecognized genre in line 3
+2019-08-17 17:01:59 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 19. Skipping line.
+2019-08-17 17:01:59 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 20. Skipping line.
+2019-08-17 17:01:59 INFO  ReleaseDeserializer:145 - Release deserialized: LP; When We All Fall Asleep, Where Do We Go?; Billie Eilish; 2019; POP
+2019-08-17 17:08:57 WARN  ParameterValidator:19 - Unrecognized genre in line 2
+2019-08-17 17:08:57 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 18. Skipping line.
+2019-08-17 17:08:57 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 19. Skipping line.
+2019-08-17 17:08:57 INFO  ReleaseDeserializer:149 - Release deserialized: LP; When We All Fall Asleep, Where Do We Go?; Billie Eilish; 2019; POP
+2019-08-17 17:10:13 WARN  ParameterValidator:19 - Unrecognized genre in line 1
+2019-08-17 17:10:13 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 17. Skipping line.
+2019-08-17 17:10:13 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 18. Skipping line.
+2019-08-17 17:10:13 INFO  ReleaseDeserializer:149 - Release deserialized: LP; When We All Fall Asleep, Where Do We Go?; Billie Eilish; 2019; POP
+2019-08-17 17:11:28 ERROR ReleaseDeserializer:52 - Error while trying to serialize release.
+2019-08-17 17:19:03 ERROR ReleaseDeserializer:145 - fsd (The system cannot find the file specified)
+2019-08-17 17:19:41 WARN  ParameterValidator:19 - Unrecognized genre in line 2
+2019-08-17 17:19:41 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 18. Skipping line.
+2019-08-17 17:19:41 WARN  ReleaseDeserializer:45 - Wrong parameters for SongData constructor in line 19. Skipping line.
+2019-08-17 17:19:41 INFO  ReleaseDeserializer:149 - Release deserialized: LP; When We All Fall Asleep, Where Do We Go; Billie Eilish; 2019; POP
+2019-08-17 17:20:24 INFO  ReleaseDeserializer:50 - Release stored to Billie Eilish - When We All Fall Asleep, Where Do We Go.txt
