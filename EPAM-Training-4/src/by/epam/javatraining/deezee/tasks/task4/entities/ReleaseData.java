@@ -20,7 +20,7 @@ public abstract class ReleaseData {
 
     @Override
     public int hashCode() {
-        return 0;
+        return (title == null ? 0 : title.hashCode()) ^ (artist == null ? 0 : artist.hashCode());
     }
 
     @Override
@@ -40,10 +40,10 @@ public abstract class ReleaseData {
 
     @Override
     public String toString() {
-        return this.type.toString() + "; " +
-                this.title + "; " +
-                this.artist + "; " +
-                this.year + "; " +
+        return this.type.toString() + "; " +    // Concatenation is much faster then sb.append in most cases.
+                this.title + "; " +             // So used it here and String Builder for Song Data,
+                this.artist + "; " +            // because SongData.toString() may be called significantly more often
+                this.year + "; " +              // during serialization.
                 this.genre;
     }
 

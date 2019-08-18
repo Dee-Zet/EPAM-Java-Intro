@@ -3,6 +3,7 @@ package by.epam.javatraining.deezee.tasks.task4.entities;
 import by.epam.javatraining.deezee.tasks.task4.enums.Genre;
 import by.epam.javatraining.deezee.tasks.task4.enums.ReleaseType;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LpData extends ReleaseData {
@@ -14,7 +15,7 @@ public class LpData extends ReleaseData {
     }
 
     public List<List<SongData>> getDiscs() {
-        return discs;
+        return Collections.unmodifiableList(discs);
     }
 
     public void setDiscs(List<List<SongData>> discs) {

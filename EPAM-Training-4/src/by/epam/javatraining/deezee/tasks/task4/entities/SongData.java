@@ -17,18 +17,17 @@ public class SongData {
 
     @Override
     public String toString() {
-        return new StringBuffer(this.title).append("; ")
+        return new StringBuilder(this.title).append("; ")
                 .append(this.artist).append("; ")
                 .append(this.duration).append("; ")
                 .append(this.genre)
                 .toString();
     }
 
-    /*@Override
+    @Override
     public int hashCode() {
-        //return this.id;
-        return 0;
-    }*/
+        return (title == null ? 0 : title.hashCode()) ^ (artist == null ? 0 : artist.hashCode()) ^ duration;
+    }
 
     @Override
     public boolean equals(Object obj) {
