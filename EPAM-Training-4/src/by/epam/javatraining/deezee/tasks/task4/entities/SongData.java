@@ -41,7 +41,9 @@ public class SongData {
 
         SongData song = (SongData)obj;
 
-        return this.title.equals(song.title) && this.artist.equals(song.artist) && this.getDuration() == song.duration;
+        return (this.title  != null && this.title.equals(song.title))  &&
+               (this.artist != null && this.artist.equals(song.title)) &&
+                this.getDuration() == song.duration;
     }
 
     public int getDuration() {
